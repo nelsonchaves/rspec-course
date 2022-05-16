@@ -1,11 +1,22 @@
-RSpec.describe 'Card' do
+class Card
+  attr_reader :rank, :suit
 
+  def initialize(rank, suit)
+    @rank = rank
+    @suit = suit
+  end
 end
 
-git init
-git add .
-git commit -m "first commit"
-git branch -M master
-git remote add origin git@github.com:nelsonchaves/rspec-course.git
+RSpec.describe Card do
+  let(:card) { Card.new('Ace', 'Spades') }
 
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnvPhDEgnt/7Mr9+j2FSoMGhf7FuYor4PXwRCe0E1tP nelsonchavespro@gmail.com
+  it 'has a rank and that rank can change' do
+    expect(card.rank).to eq('Ace')
+    card.rank = 'Queen'
+    expect(card.rank).to eq('Queen')
+  end
+
+  it 'has a suit' do
+    expect(card.suit).to eq('Spades')
+  end
+end
